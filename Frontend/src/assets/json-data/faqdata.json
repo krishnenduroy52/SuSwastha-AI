@@ -1,0 +1,14 @@
+[
+    {
+        "question": "What is  SuSwastha AI ?",
+        "answer": "SuSwastha AI is a chatbot that can help you with your medical queries. It can also help you to book a appointment with India's Top Doctors with e-Sanjeevani app."
+    },
+    {
+        "question": "How can I use SuSwastha AI ?",
+        "answer": "You can use SuSwastha AI by clicking on the general section of the navigation bar, then you have to enter your medical queries."
+    },
+    {
+        "question": "How can I book a appointment with a doctor ?",
+        "answer": "You can book a appointment with a doctor by clicking on the Make Appointment button, select the time, date and a doctor whom you want, to diagnose you. Then finally select Book Appointment button to book your appointment."
+    }
+]

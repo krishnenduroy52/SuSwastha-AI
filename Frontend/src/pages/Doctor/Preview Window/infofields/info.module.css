@@ -1,0 +1,22 @@
+.Textcontainer
+{
+    display: flex;
+    gap: 3px;
+    align-items: center;
+    
+}
+.heading
+{
+    font-size: 20px;
+    margin-left: 5px;
+    font-weight: 600;
+}
+.img
+{
+    font-size: 20px;
+}
+.data
+{
+    font-size: 20px;
+    margin-left: 5px;
+}

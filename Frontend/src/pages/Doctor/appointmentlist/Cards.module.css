@@ -1,0 +1,109 @@
+.cards{
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;    
+    display: flex;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(128, 128, 128, 0.174);
+
+}
+.cards:hover{
+    background-color: rgba(255, 255, 255, 0.732);
+    transition: background-color 0.3s ease; 
+    border: 1px solid rgba(128, 128, 128, 0.674);
+    transition: border 0.3s ease; 
+}
+.profileIcon{
+    font-size: 40px;
+    margin-top: 18px;
+    margin-left: 20px;
+    margin-right: 6px;
+    color: rgb(129, 129, 129);
+}
+.profileName{
+    padding-top: 15px;
+    padding-left: 15px;
+    font-size: 18px;
+    letter-spacing: 0.6px;
+}
+.openButton{
+    display: flex;
+    color: white;
+    background-color: rgb(77, 219, 120);
+    margin: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-radius: 5px;
+    margin-left: auto;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+.openButton p{
+    font-size: 18px;
+    margin: 1px;
+    padding-right: 5px;
+}
+.openButton:hover{
+    background-color: rgb(69, 195, 107);
+    transition: background-color 0.3s ease; 
+    cursor: pointer;
+}
+.profileDetails{
+    color: rgb(86, 86, 86);
+    margin-left: 15px;
+    padding-top: 3px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgb(211, 209, 209);
+    font-size: 14px;
+}
+.date{
+    display: flex;
+    margin-left: 15px;
+    padding-top: 8px;
+    font-size: 13px;
+    color: rgb(80, 80, 80);
+    margin-right: 5px;
+}
+.date p{
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.profileTimings{
+    display: flex;
+}
+
+@media (max-width: 992px) {
+    
+  }
+  
+  
+  @media (max-width: 1362px) {
+    .profileName{
+        font-size: 16px;
+        letter-spacing: 0.5px;
+    }  
+    .profileDetails{
+        font-size: 12px;
+    }
+
+  }
+
+  @media (max-width: 1231px) {
+    .profileName{
+        font-size: 15px;
+        letter-spacing: 0.4px;
+    }  
+    .openButton{
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .openButton p{
+        font-size: 14px;
+    }
+    .date{
+        font-size: 10px;
+    }
+  }

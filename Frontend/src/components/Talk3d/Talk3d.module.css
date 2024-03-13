@@ -1,0 +1,86 @@
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn p{
+  margin-bottom: 0;
+  padding-left: 0.5rem;
+}
+
+.full {
+  min-height: 500px;
+  position: relative;
+}
+.canvas {
+  height: 850px !important;
+  /* background-color: #f9cea7; */
+  background-image: url("./bg.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.canvasbg {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.275);
+}
+
+.area {
+  position: absolute;
+  top: 120px;
+  left: 50px;
+  /* background-color: rgb(255, 255, 255); */
+  z-index: 500;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  gap: 20px;
+  
+  border-radius: 10px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5.3px);
+  -webkit-backdrop-filter: blur(5.3px);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+
+}
+.area textarea {
+  color: white;
+  height: 150px;
+  width: 500px;
+  padding: 20px;
+  /* border: 2px solid #fd8a47; */
+  border-radius: 10px;
+  background: rgba(255, 136, 32, 0.23);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  
+}
+.area button {
+  background-color: #168c46;
+  color: white;
+  padding: 0 20px;
+  height: 50px;
+  width: 150px;
+  border-radius: 5px;
+  transition: 0.2s;
+}
+
+.area button.sp{
+  background-color: #168c46;
+  color: white;
+  padding: 0 20px;
+  height: 50px;
+  width: 50px;
+  border-radius: 5px;
+  transition: 0.2s;
+}
+
+.area button:hover {
+  transform: translateY(-5px);
+}
+
+.area .team{
+  display: flex;
+  gap: 15px;
+}

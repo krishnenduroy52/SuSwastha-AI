@@ -1,0 +1,30 @@
+.cardContainer{
+  background-color: #ececec;
+  padding: 0px 10px 0px 10px;
+  /* border-radius: 10px; */
+  height: 560px;
+  width: 500px;
+  overflow: scroll;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;  
+}
+.lower,.upper
+{
+  height: 20px;
+  width: 500px;
+  background-color: #ececec;
+}
+.lower
+{
+  border-radius: 0 0 10px 10px;
+}
+.upper
+{
+  border-radius:  10px 10px 0 0;
+}
+
+
+
+
