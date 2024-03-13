@@ -5,7 +5,7 @@ import Navbar from "./components/Navbar/Navbar";
 import Home from "./pages/Home/Home";
 import Adeno from "./pages/Prediction/Adeno";
 import Chat from "./components/Chat/Chat";
-import Talk3d from "./components/Talk3d/Talk3d"
+import Talk3d from "./components/Talk3d/Talk3d";
 import Braintumer from "./pages/Prediction/Braintumer";
 import Login from "./pages/Login/Login";
 import Pneumonia from "./pages/Prediction/Pneumonia";
@@ -22,7 +22,6 @@ import Rooms from "./pages/Rooms/Rooms";
 import Contact from "./pages/ContactUs/Contact";
 import Error from "./components/404NotFound/Error";
 import DoctorProfile from "./pages/Doctor/DoctorProfile";
-
 
 function App() {
   return (
@@ -43,6 +42,10 @@ function App() {
         <Route path="/meet" element={<Meet />} />
         <Route path="/rooms/:roomId" element={<Rooms />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/prediction/carcinoma" element={<Adeno />} />
+        <Route path="/prediction/braintumor" element={<Braintumer />} />
+        <Route path="/prediction/pneumonia" element={<Pneumonia />} />
+        <Route path="/prediction/cancer" element={<Cancer />} />
         <Route path="*" element={<Error />} />
       </Routes>
       <Footer />
