@@ -325,9 +325,19 @@ app.post("/doctor/login", async (req, res) => {
       message: "Doctor logged in successfully!",
       success: true,
       user: doct._id,
-      username: doct.username
+      username: doct.username,
     });
   } catch (error) {}
+});
+
+app.get("/doctors", async (req, res) => {
+  try {
+    const doctors = await Doctor.find();
+    res.status(200).json(doctors);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
 });
 
 app.get("/doctor/details", async (req, res) => {
