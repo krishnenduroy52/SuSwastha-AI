@@ -342,68 +342,71 @@ function Talk3d() {
   // let rtext= "Hi i am SuSwasthaAI, Ask any question related to your health.";
 
   const handleSpeak = async (transtext, lang) => {
-    // if ("speechSynthesis" in window) {
-    //   console.log("seppech",lang);
-    //   const synthesis = window.speechSynthesis;
-    //   const utterance = new SpeechSynthesisUtterance(transtext);
-
-    //   if (lang === "en") {
-    //     // /for english female voice
-    //     console.log("hellllllllo");
-    //     const voice = window.speechSynthesis.getVoices()[2]; // Example: First voice in the array
-    //     utterance.voice = voice;
-    //   }
-    //   if (lang === "bn") {
-    //     lang = "hi";
-    //   }
-    //   utterance.lang = lang + "-IN";
-    //   utterance.rate = 1;
-
-    //   synthesis.speak(utterance);
-    //   console.log(utterance);
     if ("speechSynthesis" in window) {
-      console.log("seppech", lang);
+      console.log("seppech",lang);
       const synthesis = window.speechSynthesis;
       const utterance = new SpeechSynthesisUtterance(transtext);
 
-      // Define a function to asynchronously wait for voices to be loaded
-      const loadVoices = () => {
-        return new Promise((resolve) => {
-          const checkVoices = () => {
-            const voices = synthesis.getVoices();
-            if (voices.length !== 0) {
-              resolve(voices);
-            } else {
-              setTimeout(checkVoices, 100);
-            }
-          };
-          checkVoices();
-        });
-      };
+      if (lang === "en") {
+        // /for english female voice
+        console.log("hellllllllo");
+        const voice = window.speechSynthesis.getVoices()[2]; // Example: First voice in the array
+        utterance.voice = voice;
+      }
+      if (lang === "bn") {
+        lang = "hi";
+      }
+      utterance.lang = lang + "-IN";
+      utterance.rate = 1;
 
-      // Async function to wait for voices to be loaded and set the utterance voice
-      const setUtteranceVoice = async () => {
-        const voices = await loadVoices();
-        utterance.rate = 1;
-        if (lang === "en") {
-          console.log("hellllllllo");
-          const voice = window.speechSynthesis.getVoices()[2]; // Example: First voice in the array
-          utterance.voice = voice;
-          utterance.rate = 1.5;
-        }
-        // Adjust other languages if necessary
-        if (lang === "bn") {
-          lang = "hi";
-        }
-        utterance.lang = lang + "-IN";
+      if (lang !== "en") synthesis.speak(utterance);
+      console.log(utterance);
 
-        // Speak the utterance
-        if (lang !== "en") synthesis.speak(utterance);
-        console.log(utterance);
-      };
+    // For english also
+    // if ("speechSynthesis" in window) {
+    //   console.log("seppech", lang);
+    //   const synthesis = window.speechSynthesis;
+    //   const utterance = new SpeechSynthesisUtterance(transtext);
 
-      // Call the async function to set utterance voice
-      await setUtteranceVoice();
+    //   // Define a function to asynchronously wait for voices to be loaded
+    //   const loadVoices = () => {
+    //     return new Promise((resolve) => {
+    //       const checkVoices = () => {
+    //         const voices = synthesis.getVoices();
+    //         if (voices.length !== 0) {
+    //           resolve(voices);
+    //         } else {
+    //           setTimeout(checkVoices, 100);
+    //         }
+    //       };
+    //       checkVoices();
+    //     });
+    //   };
+
+    //   // Async function to wait for voices to be loaded and set the utterance voice
+    //   const setUtteranceVoice = async () => {
+    //     const voices = await loadVoices();
+    //     utterance.rate = 1;
+    //     if (lang === "en") {
+    //       console.log("hellllllllo");
+    //       const voice = window.speechSynthesis.getVoices()[2]; // Example: First voice in the array
+    //       utterance.voice = voice;
+    //       utterance.rate = 1.5;
+    //     }
+    //     // Adjust other languages if necessary
+    //     if (lang === "bn") {
+    //       lang = "hi";
+    //     }
+    //     utterance.lang = lang + "-IN";
+
+    //     // Speak the utterance
+    //     if (lang !== "en") {synthesis.speak(utterance);}
+        
+      //   console.log(utterance);
+      // };
+
+      // // Call the async function to set utterance voice
+      // await setUtteranceVoice();
     } else {
       console.error("Speech synthesis is not supported in this browser.");
     }
