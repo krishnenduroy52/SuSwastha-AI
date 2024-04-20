@@ -23,6 +23,11 @@ import Contact from "./pages/ContactUs/Contact";
 import Error from "./components/404NotFound/Error";
 import DoctorProfile from "./pages/Doctor/DoctorProfile";
 
+import Game1 from "./components/Game/Game1";
+import Game2 from "./components/Game/Game2";
+import Game3 from "./components/Game/Game3";
+import Game4 from "./components/Game/Game4";
+
 function App() {
   return (
     <Router>
@@ -46,6 +51,10 @@ function App() {
         <Route path="/prediction/braintumor" element={<Braintumer />} />
         <Route path="/prediction/pneumonia" element={<Pneumonia />} />
         <Route path="/prediction/cancer" element={<Cancer />} />
+        <Route path="/child/game1" element={<Game1 />} />
+        <Route path="/child/game2" element={<Game2 />} />
+        <Route path="/child/game3" element={<Game3 />} />
+        <Route path="/child/game4" element={<Game4 />} />
         <Route path="*" element={<Error />} />
       </Routes>
       <Footer />

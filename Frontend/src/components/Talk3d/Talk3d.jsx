@@ -1,7 +1,16 @@
 import React, { Suspense, useEffect, useRef, useState, useMemo } from "react";
-import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
-import { faUserDoctor, faWandMagicSparkles } from "@fortawesome/free-solid-svg-icons";
-import { faMicrophone, faTrash, faPause } from "@fortawesome/free-solid-svg-icons";
+import SpeechRecognition, {
+  useSpeechRecognition,
+} from "react-speech-recognition";
+import {
+  faUserDoctor,
+  faWandMagicSparkles,
+} from "@fortawesome/free-solid-svg-icons";
+import {
+  faMicrophone,
+  faTrash,
+  faPause,
+} from "@fortawesome/free-solid-svg-icons";
 import { Canvas, useFrame } from "@react-three/fiber";
 import Stylecss from "./Talk3d.module.css";
 import {
@@ -289,7 +298,7 @@ function Avatar({
 }
 
 const makeSpeech = async (text) => {
-  return await axios.post(host + "/talk", { text });
+  return await axios.post(host + "/talk", { text: "Loru lalit" });
 };
 
 const STYLES = {
@@ -333,9 +342,20 @@ function Talk3d() {
 
     try {
       // setLoading(true);
-      const response = await axios.post(chatAiRoute, {
-        prompt: initialPrompt + text,
-      });
+      // const response = await axios.post(chatAiRoute, {
+      //   prompt: initialPrompt + text,
+      // });
+      const response = {
+        data: {
+          choices: [
+            {
+              message: {
+                content: "Hello",
+              },
+            },
+          ],
+        },
+      };
       const outputText = response.data.choices[0].message.content;
       setOutput(outputText);
       setSpeak(true);
@@ -357,58 +377,64 @@ function Talk3d() {
     setPlaying(true);
   }
 
-
   // for speech recognition
-  const startListening = () => {SpeechRecognition.startListening({ continuous: true, language: 'en-IN' });
-      };
-    const {
-      transcript,
-      listening,
-      resetTranscript,
-      browserSupportsSpeechRecognition
-    } = useSpeechRecognition();
-  
-    if (!browserSupportsSpeechRecognition) {
-       console.log("Unsupported Browser!");
-    }
-    
-    useEffect(()=>{
-      if(listening)
-      setText(transcript);
-    })
+  const startListening = () => {
+    SpeechRecognition.startListening({ continuous: true, language: "en-IN" });
+  };
+  const {
+    transcript,
+    listening,
+    resetTranscript,
+    browserSupportsSpeechRecognition,
+  } = useSpeechRecognition();
+
+  if (!browserSupportsSpeechRecognition) {
+    console.log("Unsupported Browser!");
+  }
+
+  useEffect(() => {
+    if (listening) setText(transcript);
+  });
 
   return (
     <div className={`full ${Stylecss.full}`}>
-      
       <div className={Stylecss.area}>
-      <div className={Stylecss.team}>
-        <textarea
-          rows={4}
-          type="text"
-          value={text}
-          onChange={(e) => setText(e.target.value.substring(0, 200))}
-        />
-         <button onClick={resetTranscript} className={Stylecss.sp}>
-          <FontAwesomeIcon icon={faTrash}/>
-          </button>  
-          </div>
+        <div className={Stylecss.team}>
+          <textarea
+            rows={4}
+            type="text"
+            value={text}
+            onChange={(e) => setText(e.target.value.substring(0, 200))}
+          />
+          <button onClick={resetTranscript} className={Stylecss.sp}>
+            <FontAwesomeIcon icon={faTrash} />
+          </button>
+        </div>
         <div style={{ display: "flex", gap: "20px" }}>
           <button onClick={() => outputSpeek(text)} className={Stylecss.btn}>
-            <FontAwesomeIcon icon={faWandMagicSparkles}/>
+            <FontAwesomeIcon icon={faWandMagicSparkles} />
             <p>{speak ? "Running..." : "Genrate"}</p>
           </button>
-          
-          <button onClick={ listening?SpeechRecognition.stopListening:startListening } className={Stylecss.btn}>
-            
-            {!listening ?  <FontAwesomeIcon icon={faMicrophone}/> :<FontAwesomeIcon icon={faPause}/>}
-            <p>{listening ? 'Pause' : 'Start'}</p>
 
-          </button>      
-         
+          <button
+            onClick={
+              listening ? SpeechRecognition.stopListening : startListening
+            }
+            className={Stylecss.btn}
+          >
+            {!listening ? (
+              <FontAwesomeIcon icon={faMicrophone} />
+            ) : (
+              <FontAwesomeIcon icon={faPause} />
+            )}
+            <p>{listening ? "Pause" : "Start"}</p>
+          </button>
+
           <Link to="/appointment">
             <button className={Stylecss.btn}>
-              <FontAwesomeIcon icon={faUserDoctor}/>
-              <p>Appointment</p></button>
+              <FontAwesomeIcon icon={faUserDoctor} />
+              <p>Appointment</p>
+            </button>
           </Link>
         </div>
       </div>
