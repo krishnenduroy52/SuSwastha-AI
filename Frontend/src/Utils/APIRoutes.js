@@ -20,3 +20,4 @@ export const postUserReview = `${host}/user/review`;
 
 export const doctorSignupRoute = `${host}/doctor/signup`;
 export const doctorLoginRoute = `${host}/doctor/login`;
+
