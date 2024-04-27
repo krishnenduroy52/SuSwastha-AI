@@ -1,5 +1,7 @@
 import React, { Suspense, useEffect, useRef, useState, useMemo } from "react";
+
 // import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
+
 import {
   faUserDoctor,
   faWandMagicSparkles,
@@ -296,7 +298,7 @@ function Avatar({
 }
 
 const makeSpeech = async (text) => {
-  return await axios.post(host + "/talk", { text });
+  return await axios.post(host + "/talk", { text: "Loru lalit" });
 };
 
 const STYLES = {
@@ -419,11 +421,13 @@ function Talk3d() {
 
     try {
       // setLoading(true);
+
       const response = await axios.post(chatAiRoute, {
         prompt: initialPrompt + outtext,
       });
 
       console.log("response", response.data.choices[0].message.content);
+
 
       const outputText = response.data.choices[0].message.content;
       const transtext = await translateenText(outputText, lang);
@@ -461,6 +465,7 @@ function Talk3d() {
   }
 
   // for speech recognition
+
   useEffect(() => {
     const createRecognitionInstance = () => {
       const SpeechRecognition =
@@ -568,6 +573,25 @@ function Talk3d() {
 
       console.log("Langtrans", text, lang);
       // console.log(text,rtext);
+      
+//   const startListening = () => {
+//     SpeechRecognition.startListening({ continuous: true, language: "en-IN" });
+//   };
+//   const {
+//     transcript,
+//     listening,
+//     resetTranscript,
+//     browserSupportsSpeechRecognition,
+//   } = useSpeechRecognition();
+
+//   if (!browserSupportsSpeechRecognition) {
+//     console.log("Unsupported Browser!");
+//   }
+
+//   useEffect(() => {
+//     if (listening) setText(transcript);
+//   });
+
 
       return text;
     } catch (error) {
@@ -585,11 +609,13 @@ function Talk3d() {
             value={text}
             onChange={(e) => setText(e.target.value.substring(0, 200))}
           />
+          
           <button onClick={clearText} className={Stylecss.sp}>
             <FontAwesomeIcon icon={faTrash} />
           </button>
         </div>
         <div style={{ display: "flex", gap: "20px" }}>
+
           <button
             onClick={() => outputSpeek(outtext, lang)}
             className={Stylecss.btn}
@@ -599,6 +625,7 @@ function Talk3d() {
           </button>
 
           <button onClick={toggleRecognition} className={Stylecss.btn}>
+
             {!listening ? (
               <FontAwesomeIcon icon={faMicrophone} />
             ) : (

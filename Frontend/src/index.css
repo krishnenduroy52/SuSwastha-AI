@@ -18,3 +18,41 @@ body::-webkit-scrollbar {
 body::-webkit-scrollbar-thumb {
     background-color: rgba(58, 58, 59, 0.81);
 }
+
+.generalHealthButton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 20px 0;
+}
+
+.generalHealthButton > button {
+    background-color: #3A3A3B;
+    color: white;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.generalHealthButton > button:hover {
+    background-color: #ef7f1a;
+}
+
+.generalHealthCategoriesCard{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 20px 0;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: 0.3s;
+    border: 10px solid white;
+}
+
+.generalHealthCategoriesCard:hover {
+    background-color: #f2f2f2;
+    border-radius: 10px;
+}
