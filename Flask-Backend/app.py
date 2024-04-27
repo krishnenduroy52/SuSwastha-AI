@@ -10,7 +10,9 @@ import joblib
 import os
 from flask_cors import CORS
 import json
+from googletrans import Translator
 from .Models.general_health.get_prediction import decode_prediction_label
+
 
 app = Flask(__name__)
 app.debug = True
@@ -183,6 +185,35 @@ def cancer_prediction():
 
     os.remove(img_path)
     return jsonify(result)
+
+
+# translation
+def translate_to_en(text):
+    translator = Translator()
+    lang = translator.detect(text).lang
+    english_translated_text = translator.translate(text, src=lang, dest='en')
+    return english_translated_text.text, english_translated_text.src
+
+def translate(text, lang):
+    translator = Translator()
+    translated_text = translator.translate(text, src='en', dest=lang)
+    return translated_text.text
+
+@app.route('/translate_to_en', methods=['POST'])
+def translate_to_en_route():
+    data = request.get_json()
+    text = data['text']
+    translation, src_lang = translate_to_en(text)
+    return jsonify({'translation': translation, 'source_language': src_lang})
+
+@app.route('/translate', methods=['POST'])
+def translate_route():
+    data = request.get_json()
+    text = data['text']
+    lang = data['lang']
+    translated_text = translate(text, lang)
+    return jsonify({'translation': translated_text})
+
 
 @app.route('/general-health-prediction', method=['POST'])
 def general_health_prediction():

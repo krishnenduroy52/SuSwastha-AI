@@ -1,9 +1,0 @@
-Flask
-tensorflow
-tensorflow-datasets
-tensorflow-estimator
-tensorflow-hub
-tensorflow-metadata
-keras
-Pillow
-numpy

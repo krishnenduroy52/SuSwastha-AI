@@ -105,7 +105,7 @@ function Mri() {
                 ></video>
                 <div className="flex flex-col gap-4">
                   <h1 className="font-display font-bold text-typo m-0 text-4xl md:text-5xl lg:text-6xl text-center md:!text-left">
-                    Detect <span className="text-orange-500">Brain Tumer</span>
+                    Detect <span className="text-orange-500">Brain Tumour</span>
                     <br /> MRI image
                   </h1>
                   <p className="text-typo-tertiary font-bold text-xl m-0 !text-typo text-center md:!text-left">
