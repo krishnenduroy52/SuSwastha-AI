@@ -114,11 +114,16 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import StyledCard from './StyledCard';
 import axios from 'axios';
 
+import Modal from '../../components/Modal/Modal';
+
 import data from '../../Utils/GeneralHealthProblems.json';
 
 const HealthProblems = () => {
     const [selectedCategory, setSelectedCategory] = useState(null);
     const [selectedSymptoms, setSelectedSymptoms] = useState([]);
+
+    const [showGive, setshowGive] = useState(true);
+    const [loading, setLoading] = useState(false);
 
     const handleCategoryChange = (categoryName) => {
         setSelectedCategory(selectedCategory === categoryName ? null : categoryName);
@@ -140,20 +145,25 @@ const HealthProblems = () => {
         const formData = new FormData();
         formData.append("symptoms", selectedSymptoms);
 
-        try{
+        try {
             const response = axios.post(route, formData);
 
-            if (response.status === 200){
+            if (response.status === 200) {
                 const data = response.json();
-                console.log(data.result); 
+                console.log(data.result);
             }
-            else{
+            else {
                 console.log("Error in response");
             }
         }
-        catch(error){
+        catch (error) {
             console.log('Error occurred while sending data to server:', error);
         }
+    };
+
+    const handelClose = () => {
+        setshowGive(false);
+        setLoading(false);
     };
 
     return (
@@ -161,6 +171,16 @@ const HealthProblems = () => {
             <Typography variant="h4" gutterBottom sx={{ textAlign: 'center' }}>
                 Health Problems Categorized
             </Typography>
+
+            {showGive ? (
+                <Modal
+                    show={showGive}
+                    onClose={handelClose}
+                    bigText={`Very Big Text`}
+                    smallText="We recommend you to make a appointment with doctor"
+                    percentage={"20%"}
+                />
+            ) : null}
 
             <Grid container spacing={2} mt={3}>
                 {data.categories.map((category) => (

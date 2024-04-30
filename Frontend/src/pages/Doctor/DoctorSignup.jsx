@@ -142,7 +142,7 @@ const DoctorSignup = () => {
                     // Additional actions or redirection can be performed here
                     toast.success("Doctor created successfully!");
                     setTimeout(() => {
-                        window.location.href="/doctor/login"
+                        window.location.href = "/doctor/login"
                     }, 2000);
                 })
                 .catch((error) => {
@@ -180,7 +180,7 @@ const DoctorSignup = () => {
                 <img className="image" src={DoctorSignupImage} alt="Doc Image" />
             </div>
             <div className="right-section">
-                <h1>Enter Doctor Details</h1>
+                <h1 style={{ color: "#ef7f1a" }}>Enter Doctor Details</h1>
                 <form>
                     <div className="name-number">
                         <label className="label">
