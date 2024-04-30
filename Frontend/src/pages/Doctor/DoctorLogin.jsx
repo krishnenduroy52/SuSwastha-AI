@@ -83,7 +83,7 @@ const DoctorLogin = () => {
       </div>
       <div className="right-section">
         <h1>
-          Login to <span>DOCTOR.AI</span>
+          <span style={{ color: "#ef7f1a" }}>Login to  </span>  <span>DOCTOR.AI</span>
         </h1>
         <form action="POST">
           <div className="name-number">
