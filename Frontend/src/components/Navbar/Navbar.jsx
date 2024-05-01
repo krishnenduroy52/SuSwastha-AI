@@ -32,16 +32,16 @@ const Navbar = () => {
   const [isLogin, setIsLogin] = useState(false);
   const [isDoctor, setIsDoctor] = useState(false);
 
-  const token = localStorage.getItem("doctor_ai_userID");
-  const isDoc = localStorage.getItem("isDoctor");
-
   useEffect(() => {
+    const token = localStorage.getItem("doctor_ai_userID");
+    const isDoc = localStorage.getItem("isDoctor");
     if (token) {
       setIsLogin(true);
     } else {
       setIsLogin(false);
     }
-    if (isDoc) {
+
+    if (isDoc === "true") {
       setIsDoctor(true);
     }
   }, []);
@@ -140,7 +140,42 @@ const Navbar = () => {
                 </div>
               )}
             </li>
-          ) : null}
+          ) : (
+            <li className="services" onClick={openServices}>
+              <a className="no-link">
+                Services
+                <FontAwesomeIcon
+                  className="ml-1 w-2"
+                  icon={!isOpen ? faAngleDown : faAngleUp}
+                />
+              </a>
+              {isOpen && (
+                <div ref={servicesBtn} className="services_options open">
+                  <ul>
+                    {services_menu.items.map((item, index) =>
+                      item.access === "all" || item.access === "user" ? (
+                        <>
+                          <Link key={index} to={item.url}>
+                            <li
+                              className={
+                                index === 0
+                                  ? "first-child"
+                                  : index === services_menu.items.length - 1
+                                  ? "last-child"
+                                  : ""
+                              }
+                            >
+                              {item.title}
+                            </li>
+                          </Link>
+                        </>
+                      ) : null
+                    )}
+                  </ul>
+                </div>
+              )}
+            </li>
+          )}
         </ul>
         {/* signup */}
         {isLogin === false ? (
@@ -155,7 +190,7 @@ const Navbar = () => {
             </button>
             {showProfileDropdown && (
               <div className="profile_dropdown_content">
-                {localStorage.getItem("isDoctor") ? (
+                {localStorage.getItem("isDoctor") == "true" ? (
                   <div>
                     <Link to="doctor/dashboard">Dashboard</Link>
                     <Link to="doctor/profile">My Account</Link>
