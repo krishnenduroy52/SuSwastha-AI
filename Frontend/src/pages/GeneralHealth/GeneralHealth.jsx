@@ -122,7 +122,7 @@ const HealthProblems = () => {
     const [selectedCategory, setSelectedCategory] = useState(null);
     const [selectedSymptoms, setSelectedSymptoms] = useState([]);
 
-    const [showGive, setshowGive] = useState(true);
+    const [showGive, setshowGive] = useState(false);
     const [loading, setLoading] = useState(false);
 
     const handleCategoryChange = (categoryName) => {
@@ -140,6 +140,7 @@ const HealthProblems = () => {
 
     const handleSubmit = async () => {
         console.log('Selected Diseases:', selectedSymptoms);
+        setshowGive(true);
         const route = "http://localhost:8000/general-health-prediction";
 
         const formData = new FormData();
