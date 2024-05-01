@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRightToBracket } from "@fortawesome/free-solid-svg-icons";
 
 import axios from 'axios'
-import { Link, useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import '../Login/Login.css'
 import { userLoginRoute } from "../../Utils/APIRoutes";
 
@@ -49,7 +49,7 @@ const Login = () => {
                 localStorage.setItem("doctor_ai_isDoc", "0");
                 // If the login request is successful, show a success toast message
                 toast.success("User logged in successfully!");
-                window.location.href="/"
+                window.location.href = "/"
             } catch (error) {
                 console.log(error);
                 if (
@@ -83,7 +83,7 @@ const Login = () => {
             </div>
             <div className="right-section">
                 <h1>
-                    Login to <span>DOCTOR.AI</span>
+                    <span style={{ color: "#ef7f1a" }}> Login to </span><span>DOCTOR.AI</span>
                 </h1>
                 <form action="POST">
                     <div className="name-number">
@@ -95,7 +95,7 @@ const Login = () => {
                                 name="username"
                                 className="form-input input"
                                 placeholder="Username"
-                            onChange={(e) => setUsername(e.target.value)}
+                                onChange={(e) => setUsername(e.target.value)}
                             />
                         </label>
                         <label className="label">
@@ -115,7 +115,7 @@ const Login = () => {
                         <button
                             type="button"
                             className="action_btn"
-                        onClick={handleSubmitForm}
+                            onClick={handleSubmitForm}
                         >
                             Login <FontAwesomeIcon icon={faRightToBracket} />
                         </button>

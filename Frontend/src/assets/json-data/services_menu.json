@@ -39,6 +39,12 @@
       "title": "Dyslexia",
       "url": "child/game1",
       "access": "all"
+    },
+    {
+      "className": "fa-solid fa-brain-circuit",
+      "title": "General Health Problems Prediction",
+      "url": "general-health-problems-prediction",
+      "access": "all"
     }
   ]
 }

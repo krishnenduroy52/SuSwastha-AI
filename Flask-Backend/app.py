@@ -5,9 +5,14 @@ from tensorflow.keras.preprocessing import image
 from tensorflow.keras.applications.densenet import preprocess_input
 from tensorflow.keras.applications.vgg16 import preprocess_input as preprocess_input_mri
 import numpy as np
+import pandas as pd
+import joblib
 import os
 from flask_cors import CORS
 import json
+from googletrans import Translator
+from .Models.general_health.get_prediction import decode_prediction_label
+
 
 app = Flask(__name__)
 app.debug = True
@@ -103,7 +108,7 @@ def predict_mri():
     response = {
         'predicted_class': predicted_class_label,
         'probability': float(predictions[0][predicted_class_index[0]]) * 100
-    }
+    } 
 
     # Remove the temporary image file
     os.remove(img_path)
@@ -182,10 +187,47 @@ def cancer_prediction():
     return jsonify(result)
 
 
+# translation
+def translate_to_en(text):
+    translator = Translator()
+    lang = translator.detect(text).lang
+    english_translated_text = translator.translate(text, src=lang, dest='en')
+    return english_translated_text.text, english_translated_text.src
+
+def translate(text, lang):
+    translator = Translator()
+    translated_text = translator.translate(text, src='en', dest=lang)
+    return translated_text.text
+
+@app.route('/translate_to_en', methods=['POST'])
+def translate_to_en_route():
+    data = request.get_json()
+    text = data['text']
+    translation, src_lang = translate_to_en(text)
+    return jsonify({'translation': translation, 'source_language': src_lang})
+
+@app.route('/translate', methods=['POST'])
+def translate_route():
+    data = request.get_json()
+    text = data['text']
+    lang = data['lang']
+    translated_text = translate(text, lang)
+    return jsonify({'translation': translated_text})
+
+
+@app.route('/general-health-prediction', method=['POST'])
+def general_health_prediction():
+    formData = request.form.to_dict()
+    if formData == {} or list(formData.values()) == [0]*130:
+        return jsonify({'result': 'All Good!'})
+    df = pd.DataFrame(formData, index=[0])
+    model = joblib.load('Flask-Backend\Models\general_health\knn_final_model_general_disease_prediction.pkl')
+    prediction = decode_prediction_label(model.predict(df))
+    return jsonify({'result':prediction})
+    
 @app.route('/', methods=['GET'])
 def welcome():
     return "Hi"
-
 
 if __name__ == '__main__':
     app.run(port=8000)

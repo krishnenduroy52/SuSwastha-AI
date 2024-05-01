@@ -22,6 +22,8 @@ import Rooms from "./pages/Rooms/Rooms";
 import Contact from "./pages/ContactUs/Contact";
 import Error from "./components/404NotFound/Error";
 import DoctorProfile from "./pages/Doctor/DoctorProfile";
+import GeneralHealth from "./pages/GeneralHealth/GeneralHealth";
+import BMICalculator from "./pages/BMICalculator/BMICalculator";
 
 import Game1 from "./components/Game/Game1";
 import Game2 from "./components/Game/Game2";
@@ -55,6 +57,9 @@ function App() {
         <Route path="/child/game2" element={<Game2 />} />
         <Route path="/child/game3" element={<Game3 />} />
         <Route path="/child/game4" element={<Game4 />} />
+        <Route path="/general-health-problems-prediction" element={<GeneralHealth />} />
+        <Route path="/bmi-calculator" element={<BMICalculator />} />
+
         <Route path="*" element={<Error />} />
       </Routes>
       <Footer />

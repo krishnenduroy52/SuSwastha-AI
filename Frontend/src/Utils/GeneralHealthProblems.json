@@ -1,0 +1,162 @@
+{
+    "categories": [
+        {
+            "name": "General Symptoms",
+            "symptoms": [
+                "abdominal_pain",
+                "acidity",
+                "back_pain",
+                "belly_pain",
+                "chills",
+                "constipation",
+                "dehydration",
+                "fatigue",
+                "fever",
+                "lethargy",
+                "malaise",
+                "mild_fever",
+                "nausea",
+                "pain_behind_the_eyes",
+                "restlessness",
+                "runny_nose",
+                "shivering",
+                "sweating",
+                "throat_irritation",
+                "vomiting"
+            ]
+        },
+        {
+            "name": "Respiratory Symptoms",
+            "symptoms": [
+                "blood_in_sputum",
+                "breathlessness",
+                "chest_pain",
+                "cough",
+                "phlegm",
+                "rusty_sputum",
+                "sinus_pressure",
+                "sore_throat"
+            ]
+        },
+        {
+            "name": "Skin and Body Issues",
+            "symptoms": [
+                "blackheads",
+                "blister",
+                "bloody_stool",
+                "bruising",
+                "distention_of_abdomen",
+                "dry_lips",
+                "enlarged_thyroid",
+                "excessive_hunger",
+                "itching",
+                "joint_pain",
+                "muscle_pain",
+                "muscle_weakness",
+                "skin_peeling",
+                "skin_rash",
+                "scurring",
+                "swelling_joints"
+            ]
+        },
+        {
+            "name": "Digestive System",
+            "symptoms": [
+                "abnormal_menstruation",
+                "diarrhoea",
+                "indigestion",
+                "pain_during_bowel_movements",
+                "pain_in_anal_region",
+                "stomach_bleeding",
+                "stomach_pain",
+                "ulcers_on_tongue"
+            ]
+        },
+        {
+            "name": "Neurological and Mental",
+            "symptoms": [
+                "altered_sensorium",
+                "anxiety",
+                "coma",
+                "depression",
+                "irritability",
+                "lack_of_concentration",
+                "mood_swings",
+                "slurred_speech",
+                "spinning_movements",
+                "stiff_neck",
+                "weakness_in_limbs"
+            ]
+        },
+        {
+            "name": "Urinary and Reproductive",
+            "symptoms": [
+                "bladder_discomfort",
+                "burning_micturition",
+                "dark_urine",
+                "foul_smell_of_urine",
+                "painful_walking",
+                "polyuria",
+                "spotting_urination",
+                "yellow_urine"
+            ]
+        },
+        {
+            "name": "Cardiovascular",
+            "symptoms": [
+                "fast_heart_rate",
+                "palpitations"
+            ]
+        },
+        {
+            "name": "Eye and Vision Problems",
+            "symptoms": [
+                "blurred_and_distorted_vision",
+                "redness_of_eyes",
+                "watering_from_eyes"
+            ]
+        },
+        {
+            "name": "Metabolic and Endocrine",
+            "symptoms": [
+                "brittle_nails",
+                "excessive_hunger",
+                "irregular_sugar_level",
+                "weight_gain",
+                "weight_loss",
+                "yellowing_of_eyes",
+                "yellowish_skin"
+            ]
+        },
+        {
+            "name": "Infectious and Immunological",
+            "symptoms": [
+                "swollen_lymph_nodes",
+                "toxic_look_(typhos)",
+                "yellow_crust_ooze"
+            ]
+        },
+        {
+            "name": "Other Symptoms",
+            "symptoms": [
+                "acute_liver_failure",
+                "internal_itching",
+                "obesity",
+                "receiving_blood_transfusion",
+                "receiving_unsterile_injections",
+                "red_sore_around_nose",
+                "red_spots_over_body",
+                "silver_like_dusting",
+                "small_dents_in_nails",
+                "sunken_eyes",
+                "swollen_blood_vessels",
+                "swollen_extremeties",
+                "swollen_legs",
+                "toxic_look_(typhos)",
+                "unsteadiness",
+                "visual_disturbances",
+                "weakness_of_one_body_side"
+            ]
+        }
+    ]
+}

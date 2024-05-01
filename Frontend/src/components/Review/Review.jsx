@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 // image import
 import img from "../../assets/Images/RATING_POPUP.png";
 import { Button } from "bootstrap";
-// import { FaStar } from "react-icons/fa";
+import { FaStar } from "react-icons/fa";
 import axios from "axios";
 import { postUserReview } from "../../Utils/APIRoutes";
 

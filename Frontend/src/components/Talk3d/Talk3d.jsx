@@ -1,7 +1,7 @@
 import React, { Suspense, useEffect, useRef, useState, useMemo } from "react";
-import SpeechRecognition, {
-  useSpeechRecognition,
-} from "react-speech-recognition";
+
+// import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
+
 import {
   faUserDoctor,
   faWandMagicSparkles,
@@ -331,34 +331,111 @@ function Talk3d() {
   const [text, setText] = useState(
     "Hi i am SuSwasthaAI, Ask any question related to your health."
   );
+  const [outtext, setOuttext] = useState(
+    "Hi i am SuSwasthaAI, Ask any question related to your health."
+  );
+  const [recognition, setRecognition] = useState(null);
+  const [listening, setListening] = useState(false);
   const [output, setOutput] = useState(null);
   const [audioSource, setAudioSource] = useState(null);
   const [playing, setPlaying] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [lang, setLang] = useState("en");
+  // let rtext= "Hi i am SuSwasthaAI, Ask any question related to your health.";
 
-  const outputSpeek = async (text) => {
+  const handleSpeak = async (transtext, lang) => {
+    if ("speechSynthesis" in window) {
+      console.log("seppech",lang);
+      const synthesis = window.speechSynthesis;
+      const utterance = new SpeechSynthesisUtterance(transtext);
+
+      if (lang === "en") {
+        // /for english female voice
+        console.log("hellllllllo");
+        const voice = window.speechSynthesis.getVoices()[2]; // Example: First voice in the array
+        utterance.voice = voice;
+      }
+      if (lang === "bn") {
+        lang = "hi";
+      }
+      utterance.lang = lang + "-IN";
+      utterance.rate = 1;
+
+      if (lang !== "en") synthesis.speak(utterance);
+      console.log(utterance);
+
+    // For english also
+    // if ("speechSynthesis" in window) {
+    //   console.log("seppech", lang);
+    //   const synthesis = window.speechSynthesis;
+    //   const utterance = new SpeechSynthesisUtterance(transtext);
+
+    //   // Define a function to asynchronously wait for voices to be loaded
+    //   const loadVoices = () => {
+    //     return new Promise((resolve) => {
+    //       const checkVoices = () => {
+    //         const voices = synthesis.getVoices();
+    //         if (voices.length !== 0) {
+    //           resolve(voices);
+    //         } else {
+    //           setTimeout(checkVoices, 100);
+    //         }
+    //       };
+    //       checkVoices();
+    //     });
+    //   };
+
+    //   // Async function to wait for voices to be loaded and set the utterance voice
+    //   const setUtteranceVoice = async () => {
+    //     const voices = await loadVoices();
+    //     utterance.rate = 1;
+    //     if (lang === "en") {
+    //       console.log("hellllllllo");
+    //       const voice = window.speechSynthesis.getVoices()[2]; // Example: First voice in the array
+    //       utterance.voice = voice;
+    //       utterance.rate = 1.5;
+    //     }
+    //     // Adjust other languages if necessary
+    //     if (lang === "bn") {
+    //       lang = "hi";
+    //     }
+    //     utterance.lang = lang + "-IN";
+
+    //     // Speak the utterance
+    //     if (lang !== "en") {synthesis.speak(utterance);}
+        
+      //   console.log(utterance);
+      // };
+
+      // // Call the async function to set utterance voice
+      // await setUtteranceVoice();
+    } else {
+      console.error("Speech synthesis is not supported in this browser.");
+    }
+  };
+
+  const outputSpeek = async (outtext, lang) => {
+    console.log("outspeek rtext", outtext);
     const initialPrompt =
-      "Suppose you are a great doctor and have most of medical knowledge and you can tell cure to people. Your name is Sophia. You can help them by your own. Your profession is of a doctor, you can't do any other things accept that. Don't let anyone know that you are an AI model. Wrap your answer in between 30 words, give the response without any emotion, recommend medicine or proper guidance.";
+      "Suppose you are a great female doctor and have most of medical knowledge and you can tell cure to people. Your name is Sophia. You can help them by your own. Your profession is of a doctor, you can't do any other things accept that. Don't let anyone know that you are an AI model. Wrap your answer in between 30 words, give the response without any emotion, recommend medicine or proper guidance.";
 
     try {
       // setLoading(true);
-      // const response = await axios.post(chatAiRoute, {
-      //   prompt: initialPrompt + text,
-      // });
-      const response = {
-        data: {
-          choices: [
-            {
-              message: {
-                content: "Hello",
-              },
-            },
-          ],
-        },
-      };
+
+      const response = await axios.post(chatAiRoute, {
+        prompt: initialPrompt + outtext,
+      });
+
+      console.log("response", response.data.choices[0].message.content);
+
+
       const outputText = response.data.choices[0].message.content;
+      const transtext = await translateenText(outputText, lang);
+      console.log("transtext", transtext);
       setOutput(outputText);
       setSpeak(true);
+      // Call handleSpeak with translated text and language
+      handleSpeak(transtext, lang);
     } catch (error) {
       console.error("An error occurred:", error);
     }
@@ -373,29 +450,155 @@ function Talk3d() {
   // Player is read
   function playerReady(e) {
     console.log("ready");
-    audioPlayer.current.audioEl.current.play();
+    const audioElement = audioPlayer.current.audioEl.current;
+    console.log("player,lan", lang);
+    if (lang !== "en") {
+      audioElement.volume = 0; // Set volume to 0 (muted)
+      audioElement.muted = true;
+      console.log("react play");
+    } else {
+      audioElement.volume = 1; // Set volume to 0 (muted)
+      audioElement.muted = false;
+    } // Also set muted property to true
+    audioElement.play(); // Start playing the audio
     setPlaying(true);
   }
 
   // for speech recognition
-  const startListening = () => {
-    SpeechRecognition.startListening({ continuous: true, language: "en-IN" });
-  };
-  const {
-    transcript,
-    listening,
-    resetTranscript,
-    browserSupportsSpeechRecognition,
-  } = useSpeechRecognition();
-
-  if (!browserSupportsSpeechRecognition) {
-    console.log("Unsupported Browser!");
-  }
 
   useEffect(() => {
-    if (listening) setText(transcript);
-  });
+    const createRecognitionInstance = () => {
+      const SpeechRecognition =
+        window.SpeechRecognition || window.webkitSpeechRecognition;
+      const recognitionInstance = new SpeechRecognition();
 
+      recognitionInstance.continuous = true; // Set continuous property to true
+      recognitionInstance.onresult = (event) => {
+        // Extract the latest transcript
+        const latestTranscript =
+          event.results[event.results.length - 1][0].transcript;
+
+        // Update text with the latest transcript
+        setText((prevText) => prevText + " " + latestTranscript);
+      };
+
+      setRecognition(recognitionInstance);
+    };
+
+    if (!recognition) {
+      createRecognitionInstance();
+    }
+    return () => {
+      // Clean up: stop recognition and reset the instance when the component is unmounted
+      if (recognition) {
+        recognition.stop();
+        setRecognition(null);
+      }
+    };
+  }, [recognition]);
+
+  // Function to perform actions based on lang
+  // useEffect(() => {
+  //   if (recognition) {
+  //     recognition.lang = lang + "-IN";
+  //   }
+  // }, [lang, recognition]);
+
+  // Call the function whenever lang is updated
+  // useEffect(() => {
+  //   handleLangChange();
+  // }, [lang]);
+
+  useEffect(() => {
+    console.log("lannnnnn", lang);
+  }, [lang]);
+
+  const toggleRecognition = async () => {
+    if (recognition) {
+      if (!listening) {
+        if (
+          text ==
+          "Hi i am SuSwasthaAI, Ask any question related to your health."
+        )
+          setText("");
+        recognition.start();
+        setListening(true);
+      } else {
+        recognition.stop();
+        setListening(false);
+        const rlang = await translateText(text);
+
+        setLang(rlang);
+        console.log("lannnnnng", lang, rlang);
+        setText(await translateenText(text, rlang));
+      }
+    }
+  };
+
+  const clearText = () => {
+    setText("");
+  };
+
+  const translateText = async (text) => {
+    try {
+      const response = await axios.post(
+        "http://127.0.0.1:8000/translate_to_en",
+        { text }
+      );
+      console.log("response", response);
+      text = response.data.translation;
+      setText(text);
+      console.log("text", text);
+      setOuttext(text);
+
+      const rlang = response.data.source_language;
+      console.log(rlang);
+      return rlang;
+    } catch (error) {
+      console.error("Error translating text:", error);
+      return null;
+    }
+  };
+  const translateenText = async (text, lang) => {
+    try {
+      console.log("lang", lang);
+      const response = await axios.post("http://127.0.0.1:8000/translate", {
+        // text:
+        text,
+        // lang:
+        lang,
+      });
+      console.log("response entext", response);
+      text = response.data.translation;
+
+      console.log("Langtrans", text, lang);
+      // console.log(text,rtext);
+      
+//   const startListening = () => {
+//     SpeechRecognition.startListening({ continuous: true, language: "en-IN" });
+//   };
+//   const {
+//     transcript,
+//     listening,
+//     resetTranscript,
+//     browserSupportsSpeechRecognition,
+//   } = useSpeechRecognition();
+
+//   if (!browserSupportsSpeechRecognition) {
+//     console.log("Unsupported Browser!");
+//   }
+
+//   useEffect(() => {
+//     if (listening) setText(transcript);
+//   });
+
+
+      return text;
+    } catch (error) {
+      console.error("Error translating text:", error);
+      return null;
+    }
+  };
   return (
     <div className={`full ${Stylecss.full}`}>
       <div className={Stylecss.area}>
@@ -406,22 +609,23 @@ function Talk3d() {
             value={text}
             onChange={(e) => setText(e.target.value.substring(0, 200))}
           />
-          <button onClick={resetTranscript} className={Stylecss.sp}>
+          
+          <button onClick={clearText} className={Stylecss.sp}>
             <FontAwesomeIcon icon={faTrash} />
           </button>
         </div>
         <div style={{ display: "flex", gap: "20px" }}>
-          <button onClick={() => outputSpeek(text)} className={Stylecss.btn}>
-            <FontAwesomeIcon icon={faWandMagicSparkles} />
-            <p>{speak ? "Running..." : "Genrate"}</p>
-          </button>
 
           <button
-            onClick={
-              listening ? SpeechRecognition.stopListening : startListening
-            }
+            onClick={() => outputSpeek(outtext, lang)}
             className={Stylecss.btn}
           >
+            <FontAwesomeIcon icon={faWandMagicSparkles} />
+            <p>{speak ? "Running..." : "Generate"}</p>
+          </button>
+
+          <button onClick={toggleRecognition} className={Stylecss.btn}>
+
             {!listening ? (
               <FontAwesomeIcon icon={faMicrophone} />
             ) : (

@@ -184,7 +184,7 @@ const Signup = () => {
                 />
             </div>
             <div className="right-section">
-                <h1>Create Your Account</h1>
+                <h1 style={{ color: "#ef7f1a" }}>Create Your Account</h1>
                 <form>
                     <div className="name-number">
                         <label className="label">
