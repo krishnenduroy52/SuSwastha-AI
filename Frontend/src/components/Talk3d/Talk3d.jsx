@@ -345,7 +345,7 @@ function Talk3d() {
 
   const handleSpeak = async (transtext, lang) => {
     if ("speechSynthesis" in window) {
-      console.log("seppech",lang);
+      console.log("seppech", lang);
       const synthesis = window.speechSynthesis;
       const utterance = new SpeechSynthesisUtterance(transtext);
 
@@ -364,46 +364,46 @@ function Talk3d() {
       if (lang !== "en") synthesis.speak(utterance);
       console.log(utterance);
 
-    // For english also
-    // if ("speechSynthesis" in window) {
-    //   console.log("seppech", lang);
-    //   const synthesis = window.speechSynthesis;
-    //   const utterance = new SpeechSynthesisUtterance(transtext);
+      // For english also
+      // if ("speechSynthesis" in window) {
+      //   console.log("seppech", lang);
+      //   const synthesis = window.speechSynthesis;
+      //   const utterance = new SpeechSynthesisUtterance(transtext);
 
-    //   // Define a function to asynchronously wait for voices to be loaded
-    //   const loadVoices = () => {
-    //     return new Promise((resolve) => {
-    //       const checkVoices = () => {
-    //         const voices = synthesis.getVoices();
-    //         if (voices.length !== 0) {
-    //           resolve(voices);
-    //         } else {
-    //           setTimeout(checkVoices, 100);
-    //         }
-    //       };
-    //       checkVoices();
-    //     });
-    //   };
+      //   // Define a function to asynchronously wait for voices to be loaded
+      //   const loadVoices = () => {
+      //     return new Promise((resolve) => {
+      //       const checkVoices = () => {
+      //         const voices = synthesis.getVoices();
+      //         if (voices.length !== 0) {
+      //           resolve(voices);
+      //         } else {
+      //           setTimeout(checkVoices, 100);
+      //         }
+      //       };
+      //       checkVoices();
+      //     });
+      //   };
 
-    //   // Async function to wait for voices to be loaded and set the utterance voice
-    //   const setUtteranceVoice = async () => {
-    //     const voices = await loadVoices();
-    //     utterance.rate = 1;
-    //     if (lang === "en") {
-    //       console.log("hellllllllo");
-    //       const voice = window.speechSynthesis.getVoices()[2]; // Example: First voice in the array
-    //       utterance.voice = voice;
-    //       utterance.rate = 1.5;
-    //     }
-    //     // Adjust other languages if necessary
-    //     if (lang === "bn") {
-    //       lang = "hi";
-    //     }
-    //     utterance.lang = lang + "-IN";
+      //   // Async function to wait for voices to be loaded and set the utterance voice
+      //   const setUtteranceVoice = async () => {
+      //     const voices = await loadVoices();
+      //     utterance.rate = 1;
+      //     if (lang === "en") {
+      //       console.log("hellllllllo");
+      //       const voice = window.speechSynthesis.getVoices()[2]; // Example: First voice in the array
+      //       utterance.voice = voice;
+      //       utterance.rate = 1.5;
+      //     }
+      //     // Adjust other languages if necessary
+      //     if (lang === "bn") {
+      //       lang = "hi";
+      //     }
+      //     utterance.lang = lang + "-IN";
 
-    //     // Speak the utterance
-    //     if (lang !== "en") {synthesis.speak(utterance);}
-        
+      //     // Speak the utterance
+      //     if (lang !== "en") {synthesis.speak(utterance);}
+
       //   console.log(utterance);
       // };
 
@@ -420,14 +420,11 @@ function Talk3d() {
       "Suppose you are a great female doctor and have most of medical knowledge and you can tell cure to people. Your name is Sophia. You can help them by your own. Your profession is of a doctor, you can't do any other things accept that. Don't let anyone know that you are an AI model. Wrap your answer in between 30 words, give the response without any emotion, recommend medicine or proper guidance.";
 
     try {
-      // setLoading(true);
-
       const response = await axios.post(chatAiRoute, {
         prompt: initialPrompt + outtext,
       });
 
       console.log("response", response.data.choices[0].message.content);
-
 
       const outputText = response.data.choices[0].message.content;
       const transtext = await translateenText(outputText, lang);
@@ -573,25 +570,24 @@ function Talk3d() {
 
       console.log("Langtrans", text, lang);
       // console.log(text,rtext);
-      
-//   const startListening = () => {
-//     SpeechRecognition.startListening({ continuous: true, language: "en-IN" });
-//   };
-//   const {
-//     transcript,
-//     listening,
-//     resetTranscript,
-//     browserSupportsSpeechRecognition,
-//   } = useSpeechRecognition();
 
-//   if (!browserSupportsSpeechRecognition) {
-//     console.log("Unsupported Browser!");
-//   }
+      //   const startListening = () => {
+      //     SpeechRecognition.startListening({ continuous: true, language: "en-IN" });
+      //   };
+      //   const {
+      //     transcript,
+      //     listening,
+      //     resetTranscript,
+      //     browserSupportsSpeechRecognition,
+      //   } = useSpeechRecognition();
 
-//   useEffect(() => {
-//     if (listening) setText(transcript);
-//   });
+      //   if (!browserSupportsSpeechRecognition) {
+      //     console.log("Unsupported Browser!");
+      //   }
 
+      //   useEffect(() => {
+      //     if (listening) setText(transcript);
+      //   });
 
       return text;
     } catch (error) {
@@ -609,13 +605,12 @@ function Talk3d() {
             value={text}
             onChange={(e) => setText(e.target.value.substring(0, 200))}
           />
-          
+
           <button onClick={clearText} className={Stylecss.sp}>
             <FontAwesomeIcon icon={faTrash} />
           </button>
         </div>
         <div style={{ display: "flex", gap: "20px" }}>
-
           <button
             onClick={() => outputSpeek(outtext, lang)}
             className={Stylecss.btn}
@@ -625,7 +620,6 @@ function Talk3d() {
           </button>
 
           <button onClick={toggleRecognition} className={Stylecss.btn}>
-
             {!listening ? (
               <FontAwesomeIcon icon={faMicrophone} />
             ) : (
