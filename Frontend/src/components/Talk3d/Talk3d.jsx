@@ -420,6 +420,8 @@ function Talk3d() {
       "Suppose you are a great female doctor and have most of medical knowledge and you can tell cure to people. Your name is Sophia. You can help them by your own. Your profession is of a doctor, you can't do any other things accept that. Don't let anyone know that you are an AI model. Wrap your answer in between 30 words, give the response without any emotion, recommend medicine or proper guidance.";
 
     try {
+      // setLoading(true);
+
       const response = await axios.post(chatAiRoute, {
         prompt: initialPrompt + outtext,
       });

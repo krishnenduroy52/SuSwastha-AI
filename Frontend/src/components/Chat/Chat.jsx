@@ -61,7 +61,7 @@ function Chat() {
     const response = await axios.post(chatAiRoute, {
       prompt: initialPrompt + input,
     });
-    // console.log(response);
+    console.log(response);
     setChats((chats) => {
       const updatedChats = chats.slice(0, -1); // Remove the last element from chats array
       return [
