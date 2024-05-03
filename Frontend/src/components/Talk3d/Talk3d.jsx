@@ -298,7 +298,7 @@ function Avatar({
 }
 
 const makeSpeech = async (text) => {
-  return await axios.post(host + "/talk", { text: "Loru lalit" });
+  return await axios.post(host + "/talk", { text: text });
 };
 
 const STYLES = {
